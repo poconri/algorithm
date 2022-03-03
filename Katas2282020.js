@@ -18,26 +18,34 @@ var uniqueInOrder=function(iterable){
 
 console.log(uniqueInOrder(letras));
 
-let index = [-1];
-let letras = 'Pig latin is cool' + ' Hello world !';
-let trying = [1,2,3,"",4];
-let removing = trying.splice(trying.indexOf(""),1);
-console.log(removing);
-console.log(trying);
-function letArran (str) {
-    function isCharacterALetter(char) {
+function isCharacterALetter(char) {
     return (/[a-zA-Z]/).test(char)
-    }
-    let index = [];
-    let arrOfStr = str.split('');
-    let strTT = arrOfStr.indexOf(' ');
-    while (strTT != -1){
-        if(isCharacterALetter(arrOfStr[strTT-1])) {index.push(strTT)};
-        strTT = arrOfStr.indexOf( ' ', strTT + 1);
-    }
-    let firstLetter = [`${arrOfStr[0]}ay`,...index.map(x => isCharacterALetter(arrOfStr[x +1 ]) ? `${arrOfStr[x + 1]}ay` : index.splice((index.indexOf(x)),1) )];
-    let test =
-    console.log(firstLetter);
-    console.log(index);
 }
 
+let letras = 'Pig latin is cool' + ' Hello world !';
+let splitWords = letras.split(' ').map(x => x.split(''));
+console.log(splitWords);
+if(isCharacterALetter(splitWords[0])) {
+    let result = (splitWords[0][0] = splitWords[0][splitWords[0].length - 1] + splitWords[0].slice(1, splitWords[0].length - 1) + splitWords[0][0] + 'ay');
+    console.log(result);
+}
+
+
+let letras = 'Pig latin is cool' + ' Hello world !';
+function pigIt (str) {
+    let result = [];
+    function isCharacterALetter(char) {
+    return (/[a-zA-Z]/).test(char);
+    }
+    let splitWords = str.split(' ').map(x => x.split(''));
+    for(let i =0; i < splitWords.length; i++) {
+        if(isCharacterALetter(splitWords[i])) {
+            let word = `${splitWords[i].slice(1).reduce((x , y) => x + y )}${splitWords[i][0]}ay`;
+            result.push(word);
+        }else {
+            result.push(splitWords[i].reduce((x, y)=> x + y));
+        }
+    }
+    return result.reduce((x , y) => x + ' ' + y);
+}
+console.log(pigIt(letras));
