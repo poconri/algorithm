@@ -49,3 +49,22 @@ function pigIt (str) {
     return result.reduce((x , y) => x + ' ' + y);
 }
 console.log(pigIt(letras));
+
+function hasTheSameStructure (arr1, arr2){
+    let res = "";
+    function check(param) {
+        return param.reduce((acc, val) => acc + (Array.isArray(val) ? `1${check(val)}` : '0'),res);
+    }
+    return result = check(arr1) === check(arr2);
+}
+
+// this function will return true if the two arrays have the same structure, and false if they do not.
+
+
+function hasTheSameStructure (arr1, arr2){
+    let res = "";
+    function check(param) {
+        return param.reduce((acc, val) => acc + (Array.isArray(val) ? `1${check(val)}` : '0'),res);
+    }
+    return result = check(arr1) === check(arr2);
+}
